@@ -1,18 +1,24 @@
 package com.aselad.ide.postgresapp.Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Project database entity class
  */
-
+@Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "PROJECTS")
-public class Project {
+public class Project implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,24 +44,20 @@ public class Project {
     @LastModifiedDate
     private Date updatedAt;
 
-    public Project(int projectId, String projectName, String projectScope, String projectOwner, String projectOrganization, Date createdAt, Date updatedAt) {
-        this.projectId = projectId;
-        this.projectName = projectName;
-        this.projectScope = projectScope;
-        this.projectOwner = projectOwner;
-        this.projectOrganization = projectOrganization;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
-    public Project () {}
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
     public long getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(long projectId) {
-        this.projectId = projectId;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
     public String getProjectName() {
@@ -88,21 +90,5 @@ public class Project {
 
     public void setProjectOrganization(String projectOrganization) {
         this.projectOrganization = projectOrganization;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }
